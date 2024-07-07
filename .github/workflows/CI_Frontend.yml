@@ -1,0 +1,43 @@
+name : CI for Frontend
+
+on: 
+   push :
+    branches:
+       -main
+    paths:
+       -'/PDSS-WEB-FRONT/**' 
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest 
+
+    steps:
+       - name: Checkout code
+         uses: actions/checkout@v2 # extraire le code de repo
+
+       - name: Set up Docker buildx
+         uses: docker/setup-buildx-action@v1 # c une commande pour configurer l'environnement docker buildx ,permet de construire et pousser des images docker
+
+       -name: Login to DockerHub
+        uses: docker/login-action@v2 # secrets
+        with:
+         username: ${{ secrets.DOCKER_USERNAME }}
+         password: ${{ secrets.DOCKER_PASSWORD }}
+
+       -name: Build and push Docker image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with: 
+         context: ./PDSS/PDSS-WEB-FRONT
+         push: true
+         tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }} # tag de l'iamge es tagé par id de commit qui est unique (github.sha )
+
+       -name: Remove unused Docker images 
+        run: docker image prune -f
+
+       -name: Logout from DockerHub
+        run: docker logout
+
+      
+
+
