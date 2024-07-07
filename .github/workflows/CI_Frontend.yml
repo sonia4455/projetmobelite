@@ -30,7 +30,7 @@ jobs:
         with: 
          context: ./PDSS/PDSS-WEB-FRONT
          push: true
-         tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }} # tag de l'iamge es tagé par id de commit qui est unique (github.sha )
+         tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }} # taggg g de l'iamge es tagé par id de commit qui est unique (github.sha )
 
        -name: Remove unused Docker images 
         run: docker image prune -f
