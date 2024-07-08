@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '/PDSS/PDSS-WEB-FRONT/**'
+      - '/PDSS-WEB-FRONT/**'
   workflow_dispatch:  # Permet de déclencher manuellement le workflow
 
 jobs:
@@ -41,7 +41,7 @@ jobs:
           context: ./PDSS/PDSS-WEB-FRONT
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
-          file: ./PDSS/PDSS-WEB-FRONT/Dockerfile
+          file: PDSS-WEB-FRONT/Dockerfile
 
       - name: Remove unused Docker images
         run: docker image prune -f
