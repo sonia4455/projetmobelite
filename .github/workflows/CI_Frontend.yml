@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '/PDSS-WEB-FRONT/**'
+      - '/PDSS/PDSS-WEB-FRONT/**'
   workflow_dispatch:  # Permet de déclencher manuellement le workflow
 
 jobs:
@@ -25,14 +25,23 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Debug - List files in PDSS-WEB-FRONT
+        run: ls -al ./PDSS/PDSS-WEB-FRONT
+
+      - name: Debug - Display Node.js version
+        run: node -v
+
+      - name: Debug - Display npm version
+        run: npm -v
+
       - name: Build and push Docker image
         id: docker_build
-        uses: docker/build-push-action@v2 #github marketplace contain the action related to the commande in black boxxx
+        uses: docker/build-push-action@v2
         with:
-          context: PDSS-WEB-FRONT
+          context: ./PDSS/PDSS-WEB-FRONT
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
-          file: PDSS-WEB-FRONT/Dockerfile
+          file: ./PDSS/PDSS-WEB-FRONT/Dockerfile
 
       - name: Remove unused Docker images
         run: docker image prune -f
