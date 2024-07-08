@@ -27,7 +27,7 @@ jobs:
 
       - name: Build and push Docker image
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2 #github marketplace contain the action related to the commande in black box 
         with:
           context: PDSS-WEB-FRONT
           push: true
@@ -36,5 +36,5 @@ jobs:
       - name: Remove unused Docker images
         run: docker image prune -f
 
-      - name: Logout from DockerHub
+      - name: Logout from DockerHub 
         run: docker logout
