@@ -26,7 +26,7 @@ jobs:
 
        -name: Build and push Docker image
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2 # githubaction marketplace
         with: 
          context: ./PDSS/PDSS-WEB-FRONT
          push: true
