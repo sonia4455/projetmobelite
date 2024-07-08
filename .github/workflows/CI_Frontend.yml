@@ -15,26 +15,36 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Check out the repo
-        uses: actions/checkout@v3
 
       - name: Set up Docker buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v1
 
       - name: Login to DockerHub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Debug - List files in PDSS-WEB-FRONT
+        run: ls -al PDSS-WEB-FRONT
+
+      - name: Debug - Display Node.js version
+        run: node -v
+
+      - name: Debug - Display npm version
+        run: npm -v
+
+      - name: Debug - List files in environnement
+        run: ls -al PDSS-WEB-FRONT/environnement
+
       - name: Build and push Docker image
         id: docker_build
-        uses: docker/build-push-action@v2 #github marketplace contain the action related to the commande in black box 
+        uses: docker/build-push-action@v2
         with:
           context: PDSS-WEB-FRONT
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+          file: PDSS-WEB-FRONT/Dockerfile
 
       - name: Remove unused Docker images
         run: docker image prune -f
