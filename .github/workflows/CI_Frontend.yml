@@ -32,6 +32,7 @@ jobs:
           context: PDSS-WEB-FRONT
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
+          file: /PDSS-WEB-FRONT/Dockerfile
 
       - name: Remove unused Docker images
         run: docker image prune -f
