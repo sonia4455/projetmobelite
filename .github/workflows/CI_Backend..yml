@@ -35,10 +35,10 @@ jobs:
           file: PDSS-WEB-BACK/Dockerfile
 
       - name: Change tag in Docker Compose file
-        run: sed -i 's|image: backend-app:.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}|' PDSS/docker-compose.yml
+        run: sed -i 's|image: backend-app:.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}|' docker-compose.yml
 
       - name: Deploy with Docker Compose
-        run: docker-compose -f PDSS/docker-compose.yml up -d
+        run: docker-compose -f docker-compose.yml up -d
 
       - name: Remove unused Docker images
         run: docker image prune -f
