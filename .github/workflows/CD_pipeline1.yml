@@ -33,7 +33,7 @@ jobs:
           sed -i 's|image: backend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ env.BACKEND_TAG }}|' docker-compose.yml
 
       - name: Deploy with Docker Compose
-        run: docker-compose -f projetmobelite/docker-compose.yml up -d
+        run: docker-compose -f docker-compose.yml up -d
 
       - name: Remove unused Docker images
         run: docker image prune -f
