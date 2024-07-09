@@ -34,8 +34,8 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
           file: PDSS-WEB-BACK/Dockerfile
 
-      - name: Change tag in Docker Compose file
-        run: sed -i 's|image: backend-app:.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}|' docker-compose.yml
+      - - name: Change tag in Docker Compose file
+          run: sed -i 's|image: backend-app:v2.0|image: '${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}' docker-compose.yml
 
       - name: Deploy with Docker Compose
         run: docker-compose -f docker-compose.yml up -d
