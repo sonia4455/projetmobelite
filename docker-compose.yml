@@ -23,7 +23,5 @@ services:
     image: mysql:8.0
     ports:
       - "3306:3306"
-    volumes: 
-      - C:/stagemobelite/PDSS/PDSS/db:/docker-entrypoint-initdb.d
     env_file:
       - .env 
