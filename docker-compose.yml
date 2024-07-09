@@ -26,4 +26,4 @@ services:
     volumes: 
       - C:/stagemobelite/PDSS/PDSS/db:/docker-entrypoint-initdb.d
     env_file:
-      - C:/stagemobelite/PDSS/PDSS/db/.env 
+      - .env 
