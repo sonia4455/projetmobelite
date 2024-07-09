@@ -29,11 +29,11 @@ jobs:
 
       - name: Change tags in Docker Compose file
         run: |
-          sed -i 's|image: frontend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ env.FRONTEND_TAG }}|' docker-compose.yml
-          sed -i 's|image: backend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ env.BACKEND_TAG }}|' docker-compose.yml
+          sed -i 's|image: frontend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ env.FRONTEND_TAG }}|' projetmobelite/docker-compose.yml
+          sed -i 's|image: backend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ env.BACKEND_TAG }}|' projetmobelite/docker-compose.yml
 
       - name: Deploy with Docker Compose
-        run: docker-compose -f docker-compose.yml up -d
+        run: docker-compose -f projetmobelite/docker-compose.yml up -d
 
       - name: Remove unused Docker images
         run: docker image prune -f
