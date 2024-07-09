@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '/PDSS-WEB-BACK/**'
-  workflow_dispatch:  # Permet de déclencher manuellement le workflow
+  workflow_dispatch:  # Permet de déclencher manuellement le workflowdgit 
 
 jobs:
   build-and-deploy:
