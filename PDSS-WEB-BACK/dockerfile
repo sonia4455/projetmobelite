@@ -16,5 +16,7 @@ COPY . .
 # Exposer le port sur lequel l'application s'exécute
 EXPOSE 5000
 
+RUN npm run build:dev 
+
 # Commande d'exécution de l'application / commande eli fi CMD hua lcommande eli executiha ki naamel docker run
-CMD ["npm" , "run", "build:dev"]
+CMD ["npm" , "run", "node ./bin/www"] 
