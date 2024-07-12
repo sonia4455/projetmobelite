@@ -11,7 +11,7 @@ services:
       - backend
 
   backend:
-    image: backend-app:v2.0
+    image: backend-app3:latest
     ports:
       - "5000:5000"
     env_file:
