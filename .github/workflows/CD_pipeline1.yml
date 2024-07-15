@@ -42,7 +42,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $VM_HOST >> ~/.ssh/known_hosts
-          scp docker-compose.yml $VM_USER@$VM_HOST:/home/sonia/myapp
+          scp docker-compose.yml $VM_USER@$VM_HOST:/home/sonia/depploymentCD
 
       - name: Deploy with Docker Compose on VM
         env:
@@ -51,7 +51,7 @@ jobs:
           VM_USER: sonia
         run: |
           ssh $VM_USER@$VM_HOST << 'EOF'
-            cd /home/sonia/myapp
+            cd /home/sonia/depploymentCD
             docker-compose down
             docker-compose up -d
             docker image prune -f
