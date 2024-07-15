@@ -32,7 +32,7 @@ jobs:
           sed -i 's|image: frontend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ env.FRONTEND_TAG }}|' docker-compose.yml
           sed -i 's|image: backend-app.*|image: ${{ secrets.DOCKER_USERNAME }}/backend:${{ env.BACKEND_TAG }}|' docker-compose.yml
 
-      - name: Copy Docker Compose file to VM
+      - name: Copy Docker Compose file to VM and deployment
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           VM_HOST: 10.0.2.15
@@ -41,20 +41,13 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan $VM_HOST >> ~/.ssh/known_hosts
-          scp docker-compose.yml $VM_USER@$VM_HOST:/home/sonia/depploymentCD
+          
+          scp -r ./build $VM_USER@$VM_HOST:/home/sonia/depploymentCD
 
-      - name: Deploy with Docker Compose on VM
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          VM_HOST: 10.0.2.15
-          VM_USER: sonia
-        run: |
           ssh $VM_USER@$VM_HOST << 'EOF'
             cd /home/sonia/depploymentCD
             docker-compose down
-            docker-compose up -d
-            docker image prune -f
+            docker-compose up -d --build
           EOF
 
       - name: Logout from DockerHub
