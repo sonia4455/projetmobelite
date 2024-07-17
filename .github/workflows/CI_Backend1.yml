@@ -31,7 +31,7 @@ jobs:
         with:
           context: PDSS-WEB-BACK
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/mob-app:${{ github.sha }}
           file: PDSS-WEB-BACK/Dockerfile
 
       - name: Remove unused Docker images
