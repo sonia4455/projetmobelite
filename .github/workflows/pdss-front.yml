@@ -15,7 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      
           # set the image tag to the GitHub commit ID
       - name: Set Variables
         id: vars
