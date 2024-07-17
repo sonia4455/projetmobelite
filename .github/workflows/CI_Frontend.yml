@@ -43,8 +43,11 @@ jobs:
         with:
           context: PDSS-WEB-FRONT
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/mob-app:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}
           file: PDSS-WEB-FRONT/Dockerfile
+
+      - name: Display Docker image name and tag
+        run: echo "Docker image name: frontend, tag: ${{ github.sha }}"
 
       - name: Remove unused Docker images
         run: docker image prune -f
