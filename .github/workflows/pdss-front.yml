@@ -41,13 +41,16 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/mob-app-${{ steps.vars.outputs.image_tag }}
           file: PDSS-WEB-FRONT/Dockerfile  
   deployment:
-    runs-on: pdss-runner
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set Deployment Variables
+        run: |
+          echo "TAG=${{ env.image_tag }}" >> $GITHUB_ENV
+
       - name: Deploy to VM
         run: |
           docker-compose -f PDSS-WEB-FRONT/docker-compose.yml up -d
-        
