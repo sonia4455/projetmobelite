@@ -69,3 +69,4 @@ jobs:
       - name: Deploy to VM
         run: |
           docker-compose -f PDSS-WEB-FRONT/docker-compose.yml up -d
+          
