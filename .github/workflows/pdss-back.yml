@@ -60,5 +60,6 @@ jobs:
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
       - name: Deploy to VM
         run: |
+          cp .env PDSS-WEB-BACK/.env
           docker-compose -f PDSS-WEB-BACK/docker-compose.yml up -d
 
