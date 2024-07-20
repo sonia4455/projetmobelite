@@ -40,11 +40,14 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/mob-app-${{ steps.vars.outputs.image_tag }}
           file: PDSS-WEB-FRONT/Dockerfile  
-  Deployment:
+  deployment:
     runs-on: pdss-runner
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Deploy to VM
         run: |
-            docker-compose up -d
+          docker-compose up -d
         working-directory: PDSS-WEB-FRONT
