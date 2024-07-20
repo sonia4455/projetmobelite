@@ -40,9 +40,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/mob-app-${{ steps.vars.outputs.image_tag }}
           file: PDSS-WEB-FRONT/Dockerfile  
+  
   deployment:
-    runs-on: ubuntu-latest
-    needs: builds  # Ensure deployment runs after build
+    runs-on: pdss-runner
+    needs: builds
 
     steps:
       - name: Checkout code
@@ -52,6 +53,11 @@ jobs:
         run: |
           echo "TAG=${{ env.image_tag }}" >> $GITHUB_ENV
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
+
+      - name: Print Deployment Variables
+        run: |
+          echo "DOCKER_USERNAME=${{ env.DOCKER_USERNAME }}"
+          echo "TAG=${{ env.TAG }}"
 
       - name: Deploy to VM
         run: |
