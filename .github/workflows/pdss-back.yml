@@ -24,7 +24,11 @@ jobs:
       - name: Change tags in Docker Compose file
         run: |
           sed -i 's|image: pdss-back.*|image: ${{ secrets.DOCKER_USERNAME }}/mob-app-backend-${{ steps.vars.outputs.image_tag }}|' PDSS-WEB-BACK/docker-compose.yml
-          cat PDSS-WEB-BACK/docker-compose.yml
+      
+      - name: Set Deployment Variables
+        run: |
+          echo "TAG=${{steps.vars.outputs.image_tag}}" >> $GITHUB_ENV
+          echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
@@ -43,7 +47,6 @@ jobs:
     runs-on: pdss-runner
     needs: builds
     
-
     steps:
       
       - name: Login to DockerHub
