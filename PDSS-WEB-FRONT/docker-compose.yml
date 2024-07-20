@@ -2,6 +2,6 @@ version: '3.8'
 
 services:
   pdss-front:
-    image: ${DOCKER_USERNAME}/mob-app:${TAG}
+    image: ${DOCKER_USERNAME}/mob-app-${TAG}
     ports:
       - "3000:3000"
