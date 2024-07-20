@@ -1,5 +1,5 @@
   backend:
-    image: backend-app:v2.0
+    image: ${DOCKER_USERNAME}/mob-app-backend-${TAG}
     ports:
       - "5000:5000"
     env_file:
