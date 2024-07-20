@@ -43,6 +43,7 @@ jobs:
   
   deployment:
     runs-on: pdss-runner
+    needs: builds
 
     steps:
       - name: Checkout code
