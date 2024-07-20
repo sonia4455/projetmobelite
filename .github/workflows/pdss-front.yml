@@ -42,9 +42,9 @@ jobs:
           file: PDSS-WEB-FRONT/Dockerfile  
   Deployment:
     runs-on: pdss-runner
-    
+
     steps:
       - name: Deploy to VM
         run: |
             docker-compose up -d
-        working-directory: PDSS-WEB-FRONT/docker-compose.yml
+        working-directory: PDSS-WEB-FRONT
