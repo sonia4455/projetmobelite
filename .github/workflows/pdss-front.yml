@@ -42,6 +42,7 @@ jobs:
           file: PDSS-WEB-FRONT/Dockerfile  
   deployment:
     runs-on: ubuntu-latest
+    needs: builds  # Ensure deployment runs after build
 
     steps:
       - name: Checkout code
@@ -50,6 +51,7 @@ jobs:
       - name: Set Deployment Variables
         run: |
           echo "TAG=${{ env.image_tag }}" >> $GITHUB_ENV
+          echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
 
       - name: Deploy to VM
         run: |
