@@ -11,7 +11,8 @@ on:
 jobs:
   builds:
     runs-on: pdss-runner
-
+    outputs: 
+      image_tag: ${{ steps.vars.outputs.image_tag }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -50,10 +51,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Set Deployment Variables
         run: |
-          echo "TAG=${{steps.vars.outputs.image_tag}}" >> $GITHUB_ENV
+          echo "TAG=${{needs.builds.outputs.image_tag}}" >> $GITHUB_ENV
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
+          
       - name: Deploy to VM
         run: |
           docker-compose -f PDSS-WEB-FRONT/docker-compose.yml up -d
