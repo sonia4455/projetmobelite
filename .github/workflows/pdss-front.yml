@@ -47,14 +47,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Export Variables
-        run: |
-          echo "TAG=${{ steps.vars.outputs.image_tag }}" >> $GITHUB_ENV
-
       - name: Deploy to VM
         run: |
-          docker-compose up -d
-        working-directory: PDSS-WEB-FRONT
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          TAG: ${{ steps.vars.outputs.image_tag }}
+          docker-compose -f PDSS-WEB-FRONT/docker-compose.yml up -d
+        
