@@ -42,7 +42,7 @@ jobs:
           file: PDSS-WEB-FRONT/Dockerfile  
   
   deployment:
-    runs-on: pdss-runner
+    runs-on: ubuntu-latest
     needs: builds
 
     steps:
