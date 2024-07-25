@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'PDSS-WEB-BACK/**'
-      - '.github/**'
+      - '.github/workflows/pdss-back.yml'
 
 jobs:
   builds:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-          # set the image tag to the GitHub commit ID...
+          # set the image tag to the GitHub commit ID..
       - name: Set Variables
         id: vars
         run: echo "image_tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
