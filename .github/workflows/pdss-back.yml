@@ -61,5 +61,6 @@ jobs:
       - name: Deploy to VM
         run: |
           cp .env PDSS-WEB-BACK/.env
+          cp config PDSS-WEB-BACK/config
           docker compose -f PDSS-WEB-BACK/docker-compose.yml up -d
 
