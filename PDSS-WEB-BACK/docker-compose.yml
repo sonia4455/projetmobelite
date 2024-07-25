@@ -7,8 +7,6 @@ services:
       - "5000:5000"
     depends_on:
       - db
-    env_file:
-      - src/environment/.dev.env
 
   db:
     image: mysql:8.0
