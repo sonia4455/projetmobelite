@@ -1,1 +1,43 @@
-
+on:
+    push:
+      branches:
+        - main
+      paths:
+        - 'PDSS-WEB-FRONT/**'
+        - '.github/workflows/pdss-front.yml' 
+jobs:
+    builds:
+      runs-on: pdss-runner
+      outputs: 
+        image_tag: ${{ steps.vars.outputs.image_tag }}
+  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+  
+        - name: Set Variables
+          id: vars
+          run: echo "image_tag=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+  
+        - name: Change tags in Docker Compose file
+          run: |
+            sed -i 's|image: pdss-front.*|image: mobeacr.azurecr.io/mob-app-frontend:${{ env.image_tag }}|' PDSS-WEB-FRONT/docker-compose.yml
+  
+        - name: Login to Azure Container Registry
+          uses: azure/docker-login@v1
+          with:
+            login-server: mobeACR.azurecr.io
+            username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+            password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+  
+        - name: Build and push Docker image
+          id: docker_build
+          uses: docker/build-push-action@v2
+          with:
+            context: PDSS-WEB-FRONT
+            push: true
+            tags: mobeACR.azurecr.io/mob-app-frontend:${{ env.image_tag }}
+            file: PDSS-WEB-FRONT/Dockerfile
+  
+    
+  
