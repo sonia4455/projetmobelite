@@ -37,11 +37,11 @@ jobs:
           with:
             context: PDSS-WEB-FRONT
             push: true
-            tags: mobeACR.azurecr.io/mob-app-frontend-${{ steps.vars.outputs.image_tag }}
+            tags: mobeACR.azurecr.io/mob-app-frontend-${{ env.image_tag }}
             file: PDSS-WEB-FRONT/Dockerfile
         - run: |
-            docker build . -t mobeACR.azurecr.io/mob-app-frontend-${{ steps.vars.outputs.image_tag }}
-            docker push mobeACR.azurecr.io/mob-app-frontend-${{ steps.vars.outputs.image_tag }}
+            docker build . -t mobeACR.azurecr.io/mob-app-frontend-${{ env.image_tag }}
+            docker push mobeACR.azurecr.io/mob-app-frontend-${{ env.image_tag }}
   
     
   
