@@ -37,7 +37,7 @@ jobs:
             context: PDSS-WEB-FRONT
             push: true
             tags: mobeacr.azurecr.io/mob-app-frontend:${{ env.image_tag }}
-            file: PDSS-WEB-FRONT/Dockerfile
+            file: PDSS-WEB-FRONT/Dockerfile #..
   
     
   
