@@ -27,7 +27,7 @@ jobs:
         - name: Login to Azure Container Registry
           uses: azure/docker-login@v1
           with:
-            login-server: mobeACR.azurecr.io
+            login-server: mobeacr.azurecr.io
             username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
             password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
   
@@ -37,11 +37,11 @@ jobs:
           with:
             context: PDSS-WEB-FRONT
             push: true
-            tags: mobeACR.azurecr.io/mob-app-frontend:${{ steps.vars.outputs.image_tag }}
+            tags: mobeacr.azurecr.io/mob-app-frontend:${{ steps.vars.outputs.image_tag }}
             file: PDSS-WEB-FRONT/Dockerfile
         - run: |
-            docker build . -t mobeACR.azurecr.io/mob-app-frontend:${{ steps.vars.outputs.image_tag }}
-            docker push mobeACR.azurecr.io/mob-app-frontend:${{ steps.vars.outputs.image_tag }}
+            docker build . -t mobeacr.azurecr.io/mob-app-frontend:${{ steps.vars.outputs.image_tag }}
+            docker push mobeacr.azurecr.io/mob-app-frontend:${{ steps.vars.outputs.image_tag }}
   
     
   
