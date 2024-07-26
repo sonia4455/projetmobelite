@@ -1,13 +1,14 @@
+name: pdss-front-ACR
 on:
     push:
       branches:
         - main
       paths:
         - 'PDSS-WEB-FRONT/**'
-        - '.github/workflows/pdss-front.yml' 
+        - '.github/workflows/pdss-front-ACR.yml' 
 jobs:
     builds:
-      runs-on: pdss-runner
+      runs-on: ubuntu-latest
       outputs: 
         image_tag: ${{ steps.vars.outputs.image_tag }}
   
