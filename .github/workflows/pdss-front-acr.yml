@@ -4,9 +4,8 @@ on:
         - main
       paths:
         - 'PDSS-WEB-FRONT/**'
-        - '.github/workflows/pdss-front.yml'
-  
-  jobs:
+        - '.github/workflows/pdss-front.yml' 
+jobs:
     builds:
       runs-on: pdss-runner
       outputs: 
