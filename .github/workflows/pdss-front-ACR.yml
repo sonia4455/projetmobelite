@@ -39,9 +39,7 @@ jobs:
             push: true
             tags: mobeacr.azurecr.io/mob-app-frontend:${{ env.image_tag }}
             file: PDSS-WEB-FRONT/Dockerfile
-        - run: |
-            docker build . -t mobeacr.azurecr.io/mob-app-frontend:${{ env.image_tag }}
-            docker push mobeacr.azurecr.io/mob-app-frontend:${{ env.image_tag }}
+        
   
     
   
