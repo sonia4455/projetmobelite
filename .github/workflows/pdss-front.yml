@@ -10,7 +10,7 @@ on:
 
 jobs:
   builds:
-    runs-on: pdss-runner
+    runs-on: actions-runner
     outputs: 
       image_tag: ${{ steps.vars.outputs.image_tag }}
 
