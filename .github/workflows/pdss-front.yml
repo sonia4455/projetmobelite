@@ -10,7 +10,7 @@ on:
 
 jobs:
   builds:
-    runs-on: actions-runner
+    runs-on: pdssw-runner
     outputs: 
       image_tag: ${{ steps.vars.outputs.image_tag }}
 
@@ -42,7 +42,7 @@ jobs:
           file: PDSS-WEB-FRONT/Dockerfile  
   
   deployment:
-    runs-on: pdss-runner
+    runs-on: pdssw-runner
     needs: builds
     
 
