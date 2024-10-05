@@ -10,7 +10,7 @@ RUN npm run build:dev
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 3000
-# Modifier la configuration Nginx pour écouter sur le port 3000
+# Modifier la configuration Nginx pour écouter sur le port 3000...
 RUN sed -i 's/listen       80;/listen       3000;/' /etc/nginx/conf.d/default.conf
 
 
