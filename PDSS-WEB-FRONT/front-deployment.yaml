@@ -1,0 +1,7 @@
+apiversion: apps/v1 
+kind: Deployment 
+
+metadata:
+name: frontend-deployment
+labels:
+app : frontend
