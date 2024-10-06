@@ -2,6 +2,26 @@ apiversion: apps/v1
 kind: Deployment 
 
 metadata:
-name: frontend-deployment
-labels:
-app : frontend
+  name: frontend-deployment
+  Labels:
+    app : frontend
+spec: 
+  replicas : 1 # nombre des pods
+  selector:
+    matchLabels:
+      app: frontend
+template:
+  metadata:
+    Labels:
+      app: frontend 
+spec:
+contaniners:
+  name: frontend-cont
+  image: frontend-app
+  ports:
+    containerport: 3000
+  env:
+    name: REACT_APP_BACKEND_URL
+    value: http://backend-service/api/v1 # url de backend pour le forntend 
+
+
